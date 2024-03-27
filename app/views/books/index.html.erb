@@ -1,17 +1,35 @@
-<h1>投稿一覧</h1>
-<% @lists.each do |list| %>
-
-  <p>タイトル</p>
-  <span>
-    <%=link_to list.title, list_path(list.id) %>
-  </span>
-  
-  
-  <p>画像</p>
-  <% if list.image.attached? %>
-    <%= image_tag list.image, size: "200x200" %>
-  <% else %>
-    <%= image_tag 'no_image', size: "200x200" %>
-  <% end %>
-
-<% end %>
+<%= render 'list', book: @book,user: @user %>
+    
+    <div class="col-md-8 offset-md-1">
+      <h2>Books</h2>
+       
+        <table>
+          
+          <thead>
+            <tr>
+              <th></th>
+              <th>Title</th>
+              <th>opinion</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <% @books.each do |book| %>
+            <tbody>
+              
+              <tr>
+                <td>
+                  <%= link_to user_path(book.user_id) do %>
+                   <%= image_tag book.user.get_profile_image(100, 100) %>
+                  <% end %>
+                </td>
+                <td><%= link_to book.title,book_path(book.id) %></td>
+                
+                <td><%= book.body %></td>
+              </tr>  
+            </tbody>
+           <% end %>
+        </table>  
+          
+      
+      
+    </div>

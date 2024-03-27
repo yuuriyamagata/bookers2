@@ -1,0 +1,50 @@
+<div class="container"> 
+  <div class="row"> 
+    <div class="col-md-3">
+      <h2>User info</h2>
+      <table>
+        <tbody>
+          <tr><%= image_tag user.get_profile_image(100, 100)%></tr>
+          <tr>
+            <th>name</th>
+            <th><%= user.name %></th>
+          </tr>
+          <tr>
+            <th>introduction</th>
+            <th><%= user.introduction %></th>
+          </tr>
+        </tbody>
+      </table>
+      
+      
+      <%= link_to edit_user_path(user),class: 'btn btn-outline-secondary btn-block' do%>
+      <i class=" fa-solid fa-user-cog"></i>
+      <% end %>
+      
+      <h2>New book</h2>
+      
+      <% if book.errors.any? %>
+        <%= book.errors.count %>error
+        <ul>
+          <% book.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+      <%end%>
+      
+      
+      <%= form_with model: book do |f| %>
+        <div>
+        <%= f.label :title %>
+        </div>
+        <%= f.text_field :title %>
+        
+        
+        <div>
+        <%= f.label :opinion %>
+        </div>
+        <%= f.text_area :body %>
+      	
+      	
+        <%= f.submit 'Create Book' %>
+      <% end %>
+    </div>

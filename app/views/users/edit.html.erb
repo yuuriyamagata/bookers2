@@ -1,0 +1,30 @@
+
+<div>
+  <%= flash[:notice] %>
+</div>
+
+<h2>User info</h2>
+
+<% if @user.errors.any? %>
+    <%= @user.errors.count %>error
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    <%end%>
+
+<%= form_with model: @user do |f| %>
+    <div>
+    <%= f.label :name,"Name" %>
+    </div>
+    <%= f.text_field :name %>
+    <div>
+    <%= f.label :profile_image,"Image" %>
+    </div>
+    <%= f.file_field :profile_image, accept: "image/*" %>
+    <div>
+    <%= f.label :introduction,"Introduction" %>
+    </div>
+    <%= f.text_area :introduction %>
+    <%= f.submit 'Update User' %>
+<% end %>
